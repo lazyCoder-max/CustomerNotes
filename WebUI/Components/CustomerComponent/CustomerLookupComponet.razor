@@ -1,0 +1,31 @@
+﻿@using DataAccess.Common.Models;
+<MudGrid Spacing="1">
+    <MudItem xs="10">
+        <MudAutocomplete T="CustomerDto" Label="Select Customer" SearchFunc="@SearchAsync" ValueChanged="@(x=>SearchChangedHandler(x.CustomerId))"
+                         ResetValueOnEmptyText="@_resetValueOnEmptyText"
+                         CoerceText="@_coerceText" CoerceValue="@_coerceValue"
+                         AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Primary" ToStringFunc="@(e=>e==null?null : e.CustomerName)">
+            <ItemTemplate>
+                <MudText>
+                    Customer Number: @context.CustomerNumber
+                </MudText>
+                <MudText>
+                   Customer Name: @context.CustomerName
+                </MudText>
+                <MudText>
+                    Region: @context.Region
+                </MudText>
+            </ItemTemplate>
+        </MudAutocomplete>
+    </MudItem>
+    <MudItem xs="2" Class="d-flex justify-center">
+        <MudTooltip Text="Filter">
+            <MudMenu Icon="@Icons.Material.Filled.FilterAlt" Color="Color.Primary">
+                @foreach (var item in FilterTags)
+                {
+                    <MudMenuItem OnClick="()=>HandleSelectedFilterAsync(item)">@item</MudMenuItem>
+                }
+            </MudMenu>
+        </MudTooltip>
+    </MudItem>
+</MudGrid>

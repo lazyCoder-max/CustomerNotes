@@ -1,0 +1,48 @@
+﻿@using WebUI.Common.Enums;
+<Fluxor.Blazor.Web.StoreInitializer />
+<MudDialog DisableSidePadding="true">
+    <DialogContent>
+        <MudExpansionPanels>
+            @foreach (var chemistryType in ChemistryTypes)
+            {
+                <MudExpansionPanel Text="@chemistryType" @onclick="@(()=>FetchDataAsync(chemistryType))">
+                    @if (_state.Value.RequestStatus == DataAccess.Enums.RequestStatus.Loaded)
+                    {
+                        <MudTable Items="_state.Value?.MicroChemistry?.Items.Where(x=>x.TestType == chemistryType)">
+                            <HeaderContent>
+                                <MudTh>Add to Order</MudTh>
+                                <MudTh>Test Number</MudTh>
+                                <MudTh>Test Name</MudTh>
+                                <MudTh>Type</MudTh>
+                                <MudTh>Analysis Name</MudTh>
+                                <MudTh>Method</MudTh>
+                                <MudTh>Turnaround Time</MudTh>
+                                <MudTh>Day Type</MudTh>
+                                <MudTh>Cost</MudTh>
+                            </HeaderContent>
+                            <RowTemplate>
+                                <MudTd><MudCheckBox T="bool">Yes/No</MudCheckBox></MudTd>
+                                <MudTd>@context.TestNumber</MudTd>
+                                <MudTd>@context.TestName</MudTd>
+                                <MudTd>@context.TestType</MudTd>
+                                <MudTd>@context.AnalysisName</MudTd>
+                                <MudTd>@context.MethodReference</MudTd>
+                                <MudTd>@context.Turnaround</MudTd>
+                                <MudTd>@context.DayType</MudTd>
+                                <MudTd>@context.Price.Value.ToString("$0.00")</MudTd>
+                            </RowTemplate>
+                        </MudTable>
+                    }
+                    else
+                    {
+                        <MudProgressCircular Indeterminate="true" Color="Color.Info" />
+                    }
+                </MudExpansionPanel>
+            }
+        </MudExpansionPanels>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Error" OnClick="CloseDialog">CLOSE</MudButton>
+        <MudButton Color="Color.Success"  OnClick="Submit">PROCEED</MudButton>
+    </DialogActions>
+</MudDialog>

@@ -1,0 +1,21 @@
+﻿@page "/"
+@inherits ComponentBase
+@inject NavigationManager _navigationManager
+
+<Loading />
+
+@code {
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+    }
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if(firstRender)
+        {
+            _navigationManager.NavigateTo("customer-notes");
+        }
+        return base.OnAfterRenderAsync(firstRender);
+    }
+}

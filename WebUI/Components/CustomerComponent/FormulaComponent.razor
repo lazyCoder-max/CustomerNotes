@@ -1,0 +1,42 @@
+﻿@using DataAccess.Common.Models;
+<Fluxor.Blazor.Web.StoreInitializer/>
+<MudContainer>
+    <MudGrid>
+        <MudItem xs="12">
+            <MudGrid>
+                <MudItem xs="8">
+                    <MudTextField Disabled="_isDropZoneDisabled" T="string" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" Placeholder="Search Formula..." AdornmentColor="Color.Primary" />
+                </MudItem>
+                <MudItem xs="4">
+                    <MudCheckBox T="bool" CheckedChanged="AllCheckedChanged">Include All</MudCheckBox>
+                </MudItem>
+            </MudGrid>
+        </MudItem>
+        <MudItem xs="12">
+            @if (!_isDropZoneDisabled)
+            {
+                @if (_CustomerFormulaState.Value != null)
+                {
+                    <MudDropContainer T="CustomerFormulaDto" Items="_CustomerFormulaState.Value.CustomerFormulas" ItemsSelector="@((selectedItem, dropzone)=>selectedItem.IdentifierStatus.ToString()==dropzone)" NoDropClass="mud-border-error" ItemDraggingClass="mud-alert-text-warning" ItemDropped="UpdateDraggedItems" Class="d-flex flex-wrap flex-grow-1" Style="max-height:300px; overflow-y:scroll">
+                        <ChildContent>
+                            <MudDropZone T="CustomerFormulaDto" Identifier="Included" Class="rounded-lg border-2 border-dashed mud-border-lines-default pa-6 ma-8">
+                                <MudText Typo="Typo.h6" Class="mb-4">Include</MudText>
+                            </MudDropZone>
+                            <MudDropZone T="CustomerFormulaDto" Identifier="Excluded" Class="rounded-lg border-2 border-dashed mud-border-lines-default pa-6 ma-8 flex-grow-1">
+                                <MudText Typo="Typo.h6" Class="mb-6">Exclude</MudText>
+                            </MudDropZone>
+                        </ChildContent>
+                        <ItemRenderer>
+                            <MudTooltip Text="@string.Format("{0}",context.FormulaName)">
+                                <div class=" pa-2 my-2">
+                                    <MudButton Color="Color.Primary" Variant="Variant.Outlined" OnClick="@(()=>ShowCustomerFormulaTestsAsync(context.FormulaName))"> @context.FormulaName </MudButton>
+                                </div>
+                            </MudTooltip>
+                        </ItemRenderer>
+                    </MudDropContainer>
+                }
+
+            }
+        </MudItem>
+    </MudGrid>
+</MudContainer>

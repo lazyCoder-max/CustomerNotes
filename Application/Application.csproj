@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="CustomerFormula\**" />
+    <EmbeddedResource Remove="CustomerFormula\**" />
+    <None Remove="CustomerFormula\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CustomerFormulaTests\Commnads\Create\" />
+    <Folder Include="CustomerFormulaTests\Commnads\Delete\" />
+    <Folder Include="CustomerFormulaTests\Commnads\Update\" />
+    <Folder Include="Customers\Commands\CreateCustomer\" />
+    <Folder Include="Customers\Commands\DeleteCustomer\" />
+    <Folder Include="Customers\Commands\UpdateCustomer\" />
+    <Folder Include="Formulas\Commands\CreateFormula\" />
+    <Folder Include="Formulas\Commands\DeleteFormula\" />
+    <Folder Include="Formulas\Commands\UpdateFormula\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.1" />
+    <PackageReference Include="MediatR" Version="12.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+</Project>

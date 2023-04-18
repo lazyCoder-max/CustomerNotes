@@ -1,0 +1,30 @@
+﻿@layout LoginLayout
+@inherits LayoutComponentBase
+@page  "/login"
+<MudThemeProvider IsDarkMode="false" />
+<MudPaper>
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="12" lg="2">
+            
+        </MudItem>
+        <MudItem xs="12" lg="8">
+            
+            <MudCard>
+                <MudCardHeader>
+                    <MudText>Login</MudText>
+                </MudCardHeader>
+                <MudDivider Vertical="true" />
+                <MudCardContent>
+                    <MudForm>
+                        <MudTextField Label="Username" @bind-Value="_username" />
+                        <MudTextField Label="Password" InputType="InputType.Password" @bind-Value="_password" />
+                       <br/>
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@LoginAsync">Login</MudButton>
+                    </MudForm>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" lg="2">
+        </MudItem>
+    </MudGrid>
+</MudPaper>

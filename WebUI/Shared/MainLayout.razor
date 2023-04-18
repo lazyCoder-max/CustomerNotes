@@ -1,0 +1,27 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider IsDarkMode="@_isDarkMode"/>
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <MudText Typo="Typo.h5" Class="ml-3">TH CNA</MudText>
+
+        <MudSpacer />
+        <MudTooltip Text="@themeToolTipText">
+            <MudIconButton Icon="@currentThemeIcon" Color="Color.Inherit" Edge="Edge.End" OnClick="@ChangeTheme" />
+        </MudTooltip>
+        <MudTooltip Text="Logout">
+            <MudIconButton Icon="@Icons.Material.Filled.Logout" Color="Color.Inherit" Edge="Edge.End" OnClick="@LogOut" />
+        </MudTooltip>
+    </MudAppBar>
+    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2" >
+        
+        <NavMenu />
+    </MudDrawer>
+    <MudMainContent Style="min-height:100%; height:100%">
+        @Body
+    </MudMainContent>
+</MudLayout>

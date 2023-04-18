@@ -1,0 +1,48 @@
+﻿@page "/customer-notes"
+<Fluxor.Blazor.Web.StoreInitializer/>
+<MudCard>
+    <MudCardContent>
+        <MudGrid Spacing="1">
+            <MudItem xs="12" xl="10">
+                <MudGrid Spacing="2">
+                    <MudItem xs="4">
+                        <MudCard>
+                            <MudCardHeader>
+                                <MudGrid>
+                                    <MudItem xs="12">
+                                        <MudText Typo="Typo.h5">Requirements</MudText>
+                                        
+                                    </MudItem>
+                                    <MudItem xs="12">
+                                        <CustomerLookupComponet CustomersList="customerState.Value?.Customers?.Items" FilterTags="@(new List<string>(){"Customer Name","Customer Number","Region"})" SelectionChanged="@OnSearchChanged"/>
+                                    </MudItem>
+                                </MudGrid>
+                            </MudCardHeader>
+                            <MudCardContent>
+                                <MudCheckBox Color="Color.Primary" Checked="_microChemistryCheck" Label="Micro Chemistry" T="bool" CheckedChanged="MicroChemistryAsync" />
+                                <MudCheckBox Color="Color.Primary" Checked="_flavourRequirmentCheck" Label="Flavour Requirment" />
+                                <MudCheckBox Color="Color.Primary" Checked="_kosher" Label="Kosher" />
+
+                            </MudCardContent>
+                        </MudCard>
+                    </MudItem>
+                    @if (_microChemistryCheck && _customerDto!=null)
+                    {
+                        <MudItem xs="8">
+                            <MudCard Elevation="2">
+                                <MudCardHeader>
+                                    <MudText Typo="Typo.h5">Customer Formulas</MudText>
+                                </MudCardHeader>
+                                <MudCardContent>
+                                    <FormulaComponent CustomerNumber="_customerDto.CustomerNumber" />
+                                </MudCardContent>
+                                
+                            </MudCard>
+                        </MudItem>
+                    }
+                    
+                </MudGrid>
+            </MudItem>
+        </MudGrid>
+    </MudCardContent>
+</MudCard>
